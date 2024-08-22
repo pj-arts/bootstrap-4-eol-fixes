@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Vulnerability Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <link rel="stylesheet" href="/dist/css/bootstrap.min.css" />
+
+  <link rel="stylesheet" href="src/styles.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+  <script src="dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Vulnerability Test</h1>
+    <h2><a href="https://www.cve.org/CVERecord?id=CVE-2024-6484">CVE-2024-6531</a> - <a href="https://www.cve.org/CVERecord?id=CVE-2024-6531">CVE-2024-6531</a></h2>
+
+    <ul>
+      <li><a href="https://security.snyk.io/vuln/SNYK-JS-BOOTSTRAP-7444593">SNYK-JS-BOOTSTRAP-7444593</a></li>
+      <li><a href="https://security.snyk.io/vuln/SNYK-JS-BOOTSTRAP-7444580">SNYK-JS-BOOTSTRAP-7444580</a></li>
+    </ul>
+
+  </header>
+
+  <section>
+
+    <h3>Proof of concept code</h3>
+    <pre>
+      &lt;div id=&quot;myCarousel&quot; class=&quot;carousel&quot;&gt;&lt;/div&gt;
+      &lt;a href=&quot;javascript:alert(&#39;XSS href&#39;)&quot; data-slide=&quot;prev&quot;&gt;
+        Previous Slide
+      &lt;/a&gt;
+    </pre>
+
+    <div class="pb-4">
+      <div id="normalCarouselExample" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://placeholder.pics/svg/400x200/DEDEDE/555555/Slide%201" />
+          </div>
+          <div class="carousel-item">
+            <img src="https://placeholder.pics/svg/400x200/0000ff/fff/Slide%202" />
+          </div>
+          <div class="carousel-item">
+            <img src="https://placeholder.pics/svg/400x200/ae4d08/fff/Slide%203" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul>
+      <li><a href="#normalCarouselExample" role="button" data-slide="prev">Previous</a></li>
+      <li><a href="#normalCarouselExample" role="button" data-slide="next">Next</a></li>
+      <li><a href="#normalCarouselExample" role="button" data-slide-to="2">Slide to 3</a></li>
+    </ul>
+
+    <h3>XSS vulnerability test</h3>
+    <p>Links should not alert &quot;XSS href&quot;</p>
+    <ul>
+      <li><a href="javascript:alert('XSS href')" role="button" data-target="#normalCarouselExample" data-slide="next">Next (XSS: no preventDefault)</a></li>
+      <li><a href="javascript:alert('XSS href')" role="button" data-slide="next">Next (XSS: no data-target)</a></li>
+      <li><a href="javascript:alert('XSS href')" role="button" data-target="#invalidTarget" data-slide="next">Next (XSS: no valid data-target)</a></li>
+      <li><a href="javascript:alert('XSS href')" role="button" data-slide="invalid-value">Next (XSS: invalid data-slide property)</a></li>
+      <li><a href="javascript:alert('XSS href')" role="button" data-slide-to="invalid-value">Next (XSS: invalid data-slide-to property)</a></li>
+    </ul>
+
+  </section>
+
+</body>
+
+</html>

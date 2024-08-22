@@ -1,6 +1,6 @@
 /*!
-  * Bootstrap carousel.js v4.6.2 (https://getbootstrap.com/)
-  * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap carousel.js v1.0.0 (https://github.com/pj-arts/bootstrap-4-eol-fixes)
+  * Copyright 2011-2024 PJ Arts
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
@@ -49,10 +49,6 @@
     };
     return _extends.apply(this, arguments);
   }
-
-  /**
-   * Constants
-   */
 
   var NAME = 'carousel';
   var VERSION = '4.6.2';
@@ -570,12 +566,14 @@
       var selector = Util__default["default"].getSelectorFromElement(this);
 
       if (!selector) {
+        event.preventDefault();
         return;
       }
 
       var target = $__default["default"](selector)[0];
 
       if (!target || !$__default["default"](target).hasClass(CLASS_NAME_CAROUSEL)) {
+        event.preventDefault();
         return;
       }
 
@@ -587,7 +585,13 @@
         config.interval = false;
       }
 
-      Carousel._jQueryInterface.call($__default["default"](target), config);
+      try {
+        Carousel._jQueryInterface.call($__default["default"](target), config);
+      } catch (error) {
+
+        event.preventDefault();
+        return;
+      }
 
       if (slideIndex) {
         $__default["default"](target).data(DATA_KEY).to(slideIndex);

@@ -12,6 +12,7 @@ import Util from './util'
  * Constants
  */
 
+const DEBUG = false;
 const NAME = 'carousel'
 const VERSION = '4.6.2'
 const DATA_KEY = 'bs.carousel'
@@ -547,7 +548,6 @@ class Carousel {
     }
 
     const target = $(selector)[0]
-
     if (!target || !$(target).hasClass(CLASS_NAME_CAROUSEL)) {
       event.preventDefault()
       return
@@ -567,7 +567,9 @@ class Carousel {
     try {
       Carousel._jQueryInterface.call($(target), config)
     } catch (error) {
-      console.log(error)
+      if(DEBUG) {
+        console.log(error)
+      }
       event.preventDefault()
       return
     }

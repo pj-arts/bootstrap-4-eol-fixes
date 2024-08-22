@@ -1,6 +1,6 @@
 /*!
-  * Bootstrap alert.js v4.6.2 (https://getbootstrap.com/)
-  * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap alert.js v1.0.0 (https://github.com/pj-arts/bootstrap-4-eol-fixes)
+  * Copyright 2011-2024 PJ Arts
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
