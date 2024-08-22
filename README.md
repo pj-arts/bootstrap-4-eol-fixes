@@ -1,5 +1,5 @@
 
-<h3>Bootstrap 4 EOL Fixes</h3>
+<h2>Bootstrap 4 EOL Fixes</h2>
 
 <p>
 A maintained clone of Bootstrap 4.6.2 with applied security fixes for vulnerabilities discovered after its official End-of-Life (EOL).

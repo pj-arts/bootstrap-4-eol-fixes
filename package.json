@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-4-eol-fixes",
   "description": "A maintained clone of Bootstrap 4.6.2 with applied security fixes for vulnerabilities discovered after its official End-of-Life (EOL).",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "config": {
     "version_short": "1.0"
   },
