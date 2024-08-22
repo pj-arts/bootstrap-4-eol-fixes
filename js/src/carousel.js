@@ -541,14 +541,15 @@ class Carousel {
 
   static _dataApiClickHandler(event) {
     const selector = Util.getSelectorFromElement(this)
-
     if (!selector) {
+      event.preventDefault()
       return
     }
 
     const target = $(selector)[0]
 
     if (!target || !$(target).hasClass(CLASS_NAME_CAROUSEL)) {
+      event.preventDefault()
       return
     }
 
@@ -556,13 +557,20 @@ class Carousel {
       ...$(target).data(),
       ...$(this).data()
     }
+
     const slideIndex = this.getAttribute('data-slide-to')
 
     if (slideIndex) {
       config.interval = false
     }
 
-    Carousel._jQueryInterface.call($(target), config)
+    try {
+      Carousel._jQueryInterface.call($(target), config)
+    } catch (error) {
+      console.log(error)
+      event.preventDefault()
+      return
+    }
 
     if (slideIndex) {
       $(target).data(DATA_KEY).to(slideIndex)
